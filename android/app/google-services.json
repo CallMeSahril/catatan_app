@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "14197764998",
+    "project_id": "catat-hutang-app-6e71a",
+    "storage_bucket": "catat-hutang-app-6e71a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:14197764998:android:2003cd438d6da2d1bab207",
+        "android_client_info": {
+          "package_name": "com.example.catatan_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "14197764998-5o3sfkcc3b71an6rgqsglafqctuv7hdd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVcMm3q_iNorg5RmIelEIg2DDw9E1HJIQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "14197764998-5o3sfkcc3b71an6rgqsglafqctuv7hdd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

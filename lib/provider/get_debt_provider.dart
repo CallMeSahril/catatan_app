@@ -10,7 +10,7 @@ class DebtProvider extends ChangeNotifier {
   }
   List allDebtDataList = [];
 
-  List _listTotal = [];
+  final _listTotal = [];
   List<DebtModel> _debtModel = [];
   int _sumTotal = 0;
   int get sumTotal => _sumTotal;

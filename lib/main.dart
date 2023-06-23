@@ -3,13 +3,15 @@ import 'package:catatan_app/provider/auth_provider.dart';
 import 'package:catatan_app/provider/create_debt_provider.dart';
 import 'package:catatan_app/provider/get_debt_provider.dart';
 import 'package:catatan_app/ui/pages/add_debt_page.dart';
-import 'package:catatan_app/ui/pages/login_page.dart';
 import 'package:catatan_app/ui/pages/main_page.dart';
 import 'package:catatan_app/ui/pages/register_page.dart';
 import 'package:catatan_app/ui/pages/wrapper.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+
+import 'ui/pages/login_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,7 +22,7 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,20 +38,20 @@ class MyApp extends StatelessWidget {
           create: (context) => CreateDebtProvider(),
         ),
       ],
-      child: MaterialApp(
+      child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Catatan Hutang',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
         initialRoute: Wrapper.route,
-        routes: {
-          Wrapper.route: (context) => const Wrapper(),
-          AddDebtPage.route: (context) => const AddDebtPage(),
-          LoginPage.route: (context) => const LoginPage(),
-          RegisterPage.route: (context) => const RegisterPage(),
-          MainPage.route: (context) => const MainPage(),
-        },
+        getPages: [
+          GetPage(name: Wrapper.route, page: () => const Wrapper()),
+          GetPage(name: AddDebtPage.route, page: () => const AddDebtPage()),
+          GetPage(name: LoginPage.route, page: () => LoginPage()),
+          GetPage(name: RegisterPage.route, page: () => const RegisterPage()),
+          GetPage(name: MainPage.route, page: () => const MainPage()),
+        ],
       ),
     );
   }

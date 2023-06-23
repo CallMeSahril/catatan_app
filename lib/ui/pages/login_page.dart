@@ -1,60 +1,46 @@
 import 'package:catatan_app/constant/typography.dart';
-import 'package:catatan_app/provider/auth_provider.dart';
 import 'package:catatan_app/ui/pages/main_page.dart';
+
 import 'package:catatan_app/ui/pages/register_page.dart';
 import 'package:catatan_app/ui/widgets/cta_button.dart';
 import 'package:catatan_app/ui/widgets/password_field.dart';
 import 'package:catatan_app/ui/widgets/text_link.dart';
 import 'package:flutter/material.dart';
 import 'package:form_validator/form_validator.dart';
-import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+import '../../getx/login/login_gtx.dart';
 
+class LoginPage extends StatelessWidget {
   static const route = '/loginPage';
-
-  @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
-  late final TextEditingController pwdController;
-  late final TextEditingController emailController;
-
-  @override
-  void initState() {
-    super.initState();
-    pwdController = TextEditingController();
-    emailController = TextEditingController();
-  }
-
-  @override
-  void dispose() {
-    pwdController.dispose();
-    emailController.dispose();
-    super.dispose();
-  }
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController pwdController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
-  bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
-    AuthProvider auth = Provider.of<AuthProvider>(context);
+    AuthController authController = Get.find<AuthController>();
 
-    handleLogin() async {
+    void handleLogin() async {
       if (_formKey.currentState!.validate()) {
-        setState(() {
-          isLoading = true;
-        });
-        if (await auth.login(
-            email: emailController.text, password: pwdController.text)) {
-          Navigator.pushNamedAndRemoveUntil(
-              context, MainPage.route, (route) => false);
-        } else {}
-        setState(() {
-          isLoading = false;
-        });
+        AuthController auth = Get.find<AuthController>();
+        bool loginSuccess = await auth.login(
+          email: emailController.text,
+          password: pwdController.text,
+        );
+        print("INI APA : $loginSuccess");
+        if (loginSuccess) {
+          // Navigasi ke halaman utama setelah login berhasil
+          Get.offAllNamed(MainPage.route);
+        } else {
+          // Tampilkan pesan gagal login
+          Get.snackbar(
+            'Gagal Login',
+            'Email atau password salah.',
+            snackPosition: SnackPosition.BOTTOM,
+          );
+        }
       }
     }
 
@@ -102,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
                         TextLink(
                           'Daftar disini',
                           onTap: () {
-                            Navigator.pushNamed(context, RegisterPage.route);
+                            Get.toNamed(RegisterPage.route);
                           },
                         ),
                         const Spacer(flex: 2),

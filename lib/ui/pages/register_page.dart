@@ -142,11 +142,11 @@ class _RegisterPageState extends State<RegisterPage> {
                         TextLink(
                           'Masuk disini',
                           onTap: () {
-                            Navigator.pushNamedAndRemoveUntil(
-                              context,
-                              LoginPage.route,
-                              (route) => false,
-                            );
+                            // Navigator.pushNamedAndRemoveUntil(
+                            //   context,
+                            //   LoginPage.route,
+                            //   (route) => false,
+                            // );
                           },
                         ),
                         const Spacer(),
